@@ -41,7 +41,7 @@ header {
 nav a {
     color: #f0f0f0;
     text-decoration: none;
-    margin-left: 25px;
+    margin-left: 25px; /* Adjust if only one link, or remove */
     font-weight: 300;
     position: relative;
     transition: color 0.3s ease;
@@ -67,6 +67,32 @@ nav a:hover::after {
     left: 0;
 }
 
+/* NEW: Super Font and Animation for "Our Story" */
+.super-font-link {
+    font-family: 'Permanent Marker', cursive; /* A more "super" font */
+    font-size: 1.5rem;
+    color: #ffcc00; /* Gold color */
+    text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 20px rgba(255, 204, 0, 0.7);
+    transition: all 0.4s ease-in-out;
+    animation: pulseGlow 2s infinite alternate;
+    margin-left: 0; /* Remove extra margin if it's the only link */
+}
+
+.super-font-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px rgba(255, 255, 255, 0.8);
+    transform: scale(1.05);
+}
+
+@keyframes pulseGlow {
+    0% {
+        text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 20px rgba(255, 204, 0, 0.5);
+    }
+    100% {
+        text-shadow: 0 0 8px #ffcc00, 0 0 15px #ffcc00, 0 0 25px rgba(255, 204, 0, 0.8);
+    }
+}
+
 /* Main Content & Title Animation */
 main {
     padding: 2rem 5%;
@@ -87,9 +113,19 @@ main {
 /* Video Gallery Grid */
 .video-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* UPDATED: Adjust grid to center if only two items, or keep for flexible layout */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
     gap: 2rem;
+    justify-content: center; /* NEW: Centers items if there's space */
 }
+/* If you want strictly two columns centered: */
+@media (min-width: 768px) {
+    .video-gallery {
+        grid-template-columns: repeat(2, minmax(320px, 450px)); /* Two columns with max width */
+        justify-content: center;
+    }
+}
+
 
 /* Individual Video Post Styling and Hover Effect */
 .video-post {
@@ -155,7 +191,6 @@ main {
     max-width: 900px;
 }
 
-/* NEW: Player Wrapper for responsive aspect ratio */
 .player-wrapper {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
@@ -165,7 +200,6 @@ main {
     border-radius: 8px;
 }
 
-/* NEW: Styles for both player types */
 .player-wrapper video,
 .player-wrapper iframe {
     position: absolute;
