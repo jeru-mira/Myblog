@@ -1,0 +1,230 @@
+/* General Body and Font Styling */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #f0f0f0;
+    background-color: #121212;
+    background-image: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=2070'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Header and Navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6; }
+    to { text-shadow: 0 0 10px #fff, 0 0 20px #0073e6, 0 0 30px #0073e6; }
+}
+
+nav a {
+    color: #f0f0f0;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 300;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #00aaff;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #00aaff;
+}
+
+nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Main Content & Title Animation */
+main {
+    padding: 2rem 5%;
+}
+
+.main-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: slideInFromTop 1s ease-out;
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Video Gallery Grid */
+.video-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+/* Individual Video Post Styling and Hover Effect */
+.video-post {
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.video-post:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 10px 30px rgba(0, 170, 255, 0.4);
+}
+
+.video-post img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.video-info {
+    padding: 1rem;
+}
+
+.video-info h3 {
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+}
+
+.video-info p {
+    margin: 0;
+    font-weight: 300;
+    color: #cccccc;
+}
+
+/* Video Player Overlay */
+#video-player-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#video-player-overlay:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-container {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+}
+
+/* NEW: Player Wrapper for responsive aspect ratio */
+.player-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    background-color: #000;
+    border-radius: 8px;
+}
+
+/* NEW: Styles for both player types */
+.player-wrapper video,
+.player-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    font-size: 2.5rem;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-btn:hover {
+    transform: rotate(90deg);
+}
+
+/* Share Controls Styling */
+.share-controls {
+    display: flex;
+    margin-top: 1rem;
+}
+
+#share-link-input {
+    flex-grow: 1;
+    padding: 0.7rem;
+    border: 1px solid #444;
+    background-color: #222;
+    color: #eee;
+    border-radius: 4px 0 0 4px;
+    font-family: inherit;
+}
+
+#copy-link-btn {
+    padding: 0.7rem 1.2rem;
+    border: 1px solid #00aaff;
+    background-color: #00aaff;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    transition: background-color 0.3s ease;
+}
+
+#copy-link-btn:hover {
+    background-color: #007ecc;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 5%;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 300;
+    color: #aaa;
+}
