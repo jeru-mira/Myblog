@@ -4,13 +4,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoPosts = document.querySelectorAll('.video-post');
     const overlay = document.getElementById('video-player-overlay');
     const videoPlayer = document.getElementById('main-video-player');
-    const youtubePlayer = document.getElementById('youtube-player'); // NEW: Get YouTube player
+    const youtubePlayer = document.getElementById('youtube-player');
     const closeBtn = document.querySelector('.close-btn');
     const shareLinkInput = document.getElementById('share-link-input');
     const copyLinkBtn = document.getElementById('copy-link-btn');
 
-    // MODIFIED: Function to open the video player
+    // Function to open the video player
     function openPlayer(videoId, videoSrc, videoType) {
+        // IMPORTANT: Check if videoSrc is actually available
+        if (!videoSrc || videoSrc.includes('placeholder.com')) {
+            // Optional: You could show an alert or a message here
+            // alert("This video is not available yet. Stay tuned!");
+            return; // Exit the function if no valid video source
+        }
+
         // Hide both players initially
         videoPlayer.style.display = 'none';
         youtubePlayer.style.display = 'none';
@@ -35,12 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
     }
 
-    // MODIFIED: Function to close the video player
+    // Function to close the video player
     function closePlayer() {
         // Pause the video and clear the source for both players
         videoPlayer.pause();
         videoPlayer.src = '';
-        youtubePlayer.src = '';
+        youtubePlayer.src = ''; // Clear YouTube iframe src as well
 
         // Hide the overlay
         overlay.classList.add('hidden');
@@ -50,12 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
         history.pushState("", document.title, window.location.pathname + window.location.search);
     }
 
-    // MODIFIED: Add click event listeners to each video post
+    // Add click event listeners to each video post
     videoPosts.forEach(post => {
         post.addEventListener('click', () => {
             const videoSrc = post.querySelector('img').dataset.videoSrc;
             const videoId = post.dataset.videoId;
-            const videoType = post.dataset.videoType; // NEW: Get the video type
+            const videoType = post.dataset.videoType;
             openPlayer(videoId, videoSrc, videoType);
         });
     });
@@ -89,14 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // MODIFIED: Check if a video link was shared in the URL on page load
+    // Check if a video link was shared in the URL on page load
     function checkUrlForVideo() {
         if (window.location.hash) {
             const videoIdFromUrl = window.location.hash.substring(1);
             const postToOpen = document.querySelector(`.video-post[data-video-id="${videoIdFromUrl}"]`);
             if (postToOpen) {
                 const videoSrc = postToOpen.querySelector('img').dataset.videoSrc;
-                const videoType = postToOpen.dataset.videoType; // NEW: Get the video type
+                const videoType = postToOpen.dataset.videoType;
                 openPlayer(videoIdFromUrl, videoSrc, videoType);
             }
         }
